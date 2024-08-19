@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:55:09 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/16 17:59:48 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:17:14 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,8 @@ void	pipex_error_exit(char *param, int error)
 	exit(error);
 }
 
-
+void	malloc_error_exit(void)
+{
+	ft_putstr_fd("pipex: could not allocate memory", 2);
+	exit (ERR_MALLOC);
+}

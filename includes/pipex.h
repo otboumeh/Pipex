@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:59:13 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/16 18:03:39 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:17:24 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,16 @@ typedef struct s_pipex
 	int		output_fd;
 	int		fd_pipe[2];
 	char	**paths;
+	char	**argv_cmd;
+	pid_t	pid1;
+	pid_t	pid2;
 }	t_pipex;
 
 
-char **split_path(char **envp);
+char 	**split_path(char **envp);
 void	pipex_error_exit(char *param, int error);
 void	pipex_print_msg(char *param, int error);
+void	first_child(t_pipex *pipex, char **argv, char **envp);
+void	malloc_error_exit(void);
 
 # endif
