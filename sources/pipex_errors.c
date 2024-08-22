@@ -6,11 +6,11 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:55:09 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/19 16:17:14 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:30:39 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	pipex_print_msg(char *param, int error)
 {
@@ -34,8 +34,8 @@ void	pipex_print_msg(char *param, int error)
 		ft_putstr_fd("could not fork process", 2);
 	if (error == NO_PATH)
 		ft_putstr_fd("PATH variable is not set", 2);
-	if (param && (error == CMD_NOT_FOUND || error == NO_FILE || error == NO_PERM || \
-			error == CMD_FAIL))
+	if (param && (error == CMD_NOT_FOUND || error == NO_FILE || \
+			error == NO_PERM || error == CMD_FAIL))
 		ft_putstr_fd(param, 2);
 	ft_putstr_fd("\n", 2);
 }
@@ -50,4 +50,11 @@ void	malloc_error_exit(void)
 {
 	ft_putstr_fd("pipex: could not allocate memory", 2);
 	exit (ERR_MALLOC);
+}
+
+void	px_error_free(t_pipex *pipex, char *param, int err)
+{
+	pipex_error_msg(param, err);
+	if (err == CMD_NOT_FOUND || err == CMD_FAIL)
+		free_child(pipex);
 }

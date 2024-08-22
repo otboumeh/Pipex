@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:45:10 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/19 16:17:49 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:05:44 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //dup2(pipex->in_fd, STDIN_FILENO) : 
 //Utilisé pour lire des données depuis un pipe ou un fichier.
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	first_child(t_pipex *pipex, char **argv, char **envp)
 {
@@ -36,7 +36,13 @@ void	first_child(t_pipex *pipex, char **argv, char **envp)
 	pipex->argv_cmd = ft_split(argv[2], " ");
 	if (!pipex->argv_cmd)
 		malloc_error_exit();
-	
-		
-	
+	pipex->cmd_path = get_cmd_path(pipex->argv_cmd[0], pipex->paths);
+	if (!pipex->cmd_path)
+	{
+		px_error_free(pipex, pipex->argv_cmd[0], CMD_NOT_FOUND);
+		return ;
+	}
+	if (execve(pipex->cmd_path, pipex->argv_cmd, envp) == -1)
+		px_error_free(pipex, pipex->argv_cmd[0], CMD_FAIL);
 }
+		

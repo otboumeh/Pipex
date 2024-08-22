@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:57:16 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/14 15:24:28 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:55 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <limits.h> //Includes INT_MIN and INT_MAX values
 # include <stdlib.h>
-
 
 //ft_printf.c
 
