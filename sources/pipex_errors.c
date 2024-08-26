@@ -54,7 +54,7 @@ void	malloc_error_exit(void)
 
 void	px_error_free(t_pipex *pipex, char *param, int err)
 {
-	pipex_error_msg(param, err);
+	pipex_error_exit(param, err);
 	if (err == CMD_NOT_FOUND || err == CMD_FAIL)
 		free_child(pipex);
 }

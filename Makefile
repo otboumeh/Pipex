@@ -17,7 +17,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 PIPEX_LIB = ./includes/pipex.a
 
-SRCS = $(wildcard src/pipex*.c)
+SRCS = $(wildcard sources/pipex*.c)
 
 MAIN = main.c
 

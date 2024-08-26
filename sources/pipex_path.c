@@ -33,8 +33,10 @@ char	**split_path(char **envp)
 
 	full_path = get_path(envp);
 	if (!full_path)
-		return (1);
+		pipex_error_exit(NULL, NO_PATH);
 	path_splited = ft_split(full_path, ':');
+	if (!path_splited)
+		malloc_error_exit();
 	return (path_splited);
 }
 
