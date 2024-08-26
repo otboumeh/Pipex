@@ -46,6 +46,7 @@ typedef struct s_pipex
 
 //pipex_child.c
 void	first_child(t_pipex *pipex, char **argv, char **envp);
+void	second_child(t_pipex *pipex, char **argv, char **envp);
 
 //pipex_error.c
 void	pipex_print_msg(char *param, int error);
@@ -60,5 +61,6 @@ char	*get_cmd_path(char	*cmd, char **paths_array);
 //pipex_free.c
 void	free_aray(char **aray);
 void	free_child(t_pipex *pipex);
+void	free_parent_closefd(t_pipex *pipex);
 
 #endif

@@ -12,16 +12,17 @@
 
 #include "./includes/pipex.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_pipex pipex;
+	t_pipex	pipex;
+
 	if (argc != 5)
 		pipex_error_exit(NULL, INV_ARGS);
-	pipex.input_fd = open(argv[1],O_RDONLY);
+	pipex.input_fd = open(argv[1], O_RDONLY);
 	pipex.output_fd = open(argv[4], O_TRUNC | O_CREAT | O_WRONLY, 0000644);
 	pipex.paths = split_path(envp);
-		if (pipe(pipex.fd_pipe) < 0)
-			pipex_error_exit(NULL, PIPE_ERR);
+	if (pipe(pipex.fd_pipe) < 0)
+		pipex_error_exit(NULL, PIPE_ERR);
 	pipex.pid1 = fork();
 	if (pipex.pid1 == -1)
 		pipex_error_exit(NULL, FORK_ERR);
@@ -30,6 +31,8 @@ int main(int argc, char **argv, char **envp)
 	pipex.pid2 = fork();
 	if (pipex.pid2 == -1)
 		pipex_error_exit(NULL, FORK_ERR);
-	
-		
+	if (pipex.pid2 == 0)
+		second_child(&pipex, argv, envp);
+	free_parent_closefd(&pipex);
+	return (0);
 }

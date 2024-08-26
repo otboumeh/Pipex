@@ -33,3 +33,14 @@ void	free_child(t_pipex *pipex)
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
 }
+
+void	free_parent_closefd(t_pipex *pipex)
+{
+	close(pipex->fd_pipe[0]);
+	close(pipex->fd_pipe[1]);
+	waitpid(pipex->pid1, NULL, 0);
+	waitpid(pipex->pid2, NULL, 0);
+	close(pipex->input_fd);
+	close(pipex->output_fd);
+	free_array(pipex->paths);
+}
