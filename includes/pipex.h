@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:59:13 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/22 19:40:07 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:23:07 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
 

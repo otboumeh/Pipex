@@ -6,13 +6,13 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:45:10 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/22 19:05:44 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:15:57 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //dup2(pipex->fd_pipe[1], STDOUT_FILENO) :
 // Utilisé pour ecrire des données vers un pipe ou un autre processus.
-//dup2(pipex->in_fd, STDIN_FILENO) : 
+//dup2(pipex->in_fd, STDIN_FILENO) :
 //Utilisé pour lire des données depuis un pipe ou un fichier.
 
 #include "../includes/pipex.h"
