@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:51:27 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 16:42:13 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:51:06 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	perror_exit_bonus(int err, char *param)
 
 void	cmd_not_found_bonus(t_pipex_bonus *pipex)
 {
-	pipex_error_msg(pipex->argv_cmd[0], CMD_NOT_FOUND);
+	pipex_print_msg(pipex->argv_cmd[0], CMD_NOT_FOUND);
 	free_array(pipex->argv_cmd);
 }
 
 void	cmd_fail_exit_bonus(t_pipex_bonus *pipex)
 {
-	pipex_error_msg(pipex->argv_cmd[0], CMD_FAIL);
+	pipex_print_msg(pipex->argv_cmd[0], CMD_FAIL);
 	free(pipex->cmd_path);
 	free_array(pipex->argv_cmd);
 	exit (CMD_FAIL);

@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:26:41 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 18:36:52 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:55:49 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	create_pipes_bonus(t_pipex_bonus *pipex)
 		if (pipe(pipex->pipe + 2 * i) == -1)
 		{
 			free(pipex->pipe);
-			px_perror_exit(NULL, PIPE_ERR);
+			perror_exit_bonus(PIPE_ERR, NULL);
 		}
 		i++;
 	}
@@ -54,7 +54,7 @@ static void	init_pipex_bonus(t_pipex_bonus *pipex, int argc,
 	pipex->pid = (pid_t *)malloc(sizeof(pid_t) * pipex->cmd);
 	if (!pipex->pid)
 		malloc_error_exit();
-	create_pipes_bonus(&pipex);
+	create_pipes_bonus(pipex);
 }
 static bool	child_from_parent(t_pipex_bonus pipex, int child_index)
 {

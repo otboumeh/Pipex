@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:59:13 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/27 14:23:07 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:49:46 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ char	**split_path(char **envp);
 char	*get_cmd_path(char	*cmd, char **paths_array);
 
 //pipex_free.c
-void	free_aray(char **aray);
+void	free_array(char **aray);
 void	free_child(t_pipex *pipex);
 void	free_parent_closefd(t_pipex *pipex);
 
 #endif
+/*./pipex file1.txt "tr 'A-Z' 'a-z'" "grep ola" "wc -l" file2.txt */
