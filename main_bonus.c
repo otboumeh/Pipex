@@ -6,12 +6,30 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:26:41 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/27 17:38:54 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:46:05 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/pipex_bonus.h"
 
+static void	create_pipes_bonus(t_pipex_bonus *pipex)
+{
+	int	i;
+
+	pipex->pipe = (int *)malloc((pipex->cmd - 1) * 2 * sizeof(int));
+	if (!pipex->pipe)
+		malloc_error_exit();
+	i = 0;
+	while (i < (pipex->cmd - 1))
+	{
+		if (pipe(pipex->pipe + 2 * i) == -1)
+		{
+			free(pipex->pipe);
+			px_perror_exit(NULL, PIPE_ERR);
+		}
+		i++;
+	}
+}
 static void	open_files_bonus(t_pipex_bonus *pipex, int argc, char **argv)
 {
 	pipex->input_fd = open(argv[1], O_RDONLY);
@@ -27,9 +45,21 @@ static void	init_pipex_bonus(t_pipex_bonus *pipex, int argc,
 	pipex->pid = (pid_t *)malloc(sizeof(pid_t) * pipex->cmd);
 	if (!pipex->pid)
 		malloc_error_exit();
-	
+	create_pipes_bonus(&pipex);
 }
+static bool	child_from_parent(t_pipex_bonus pipex, int child_index)
+{
+	int	i;
 
+	i = 0;
+	while (i < child_index)
+	{
+		if (pipex.pid[i] == 0)
+			return (false);
+		i++;
+	}
+	return (true);
+}
 int main(int argc, char **argv, char **envp)
 {
 	t_pipex_bonus pipex;
@@ -37,5 +67,18 @@ int main(int argc, char **argv, char **envp)
 
 	init_pipex_bonus(&pipex, argc, argv, envp);	
 	i = 0;
-	
+	while (i < pipex.cmd)
+	{
+		pipex.pid[i] = fork();
+		if (pipex.pid[i] == -1)
+		{
+			free_parent_bonus(&pipex);
+			pipex_error_exit(NULL, FORK_ERR);
+		}
+		else if (pipex.pid[i] == 0 && child_from_parent(pipex, i))
+			child_selector_bonus(&pipex, argv, envp, i);
+		i++;
+	}
+	free_parent_closefd_bonus(&pipex);
+	return (0);
 }
