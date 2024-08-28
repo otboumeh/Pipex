@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:51:45 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/14 15:22:10 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:46:33 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 //Part1
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

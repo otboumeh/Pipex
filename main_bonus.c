@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:26:41 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 11:46:05 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:36:52 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,23 @@ static void	create_pipes_bonus(t_pipex_bonus *pipex)
 }
 static void	open_files_bonus(t_pipex_bonus *pipex, int argc, char **argv)
 {
-	pipex->input_fd = open(argv[1], O_RDONLY);
-	pipex->output_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | 01,0000644);
+	if (pipex->here_doc)
+		pipex->input_fd = open("/tmp/.here_doc", O_RDONLY, 0000644);
+	else
+		pipex->input_fd = open(argv[1], O_RDONLY);
+	if (pipex->here_doc)
+		pipex->output_fd = open (argv[5], O_APPEND | O_CREAT | O_WRONLY, 0000644);
+	else
+		pipex->output_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | 01, 0000644);
 }
 
 static void	init_pipex_bonus(t_pipex_bonus *pipex, int argc,
 				 char **argv, char **envp)
 {
-	pipex->cmd = argc - 3;
+	if (pipex->here_doc)
+		pipex->cmd = 2;
+	else
+		pipex->cmd = argc - 3;
 	open_files_bonus(pipex, argc, argv);
 	pipex->paths = split_path(envp);
 	pipex->pid = (pid_t *)malloc(sizeof(pid_t) * pipex->cmd);
@@ -64,7 +73,13 @@ int main(int argc, char **argv, char **envp)
 {
 	t_pipex_bonus pipex;
 	int i;
-
+	
+	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc == 6)
+		here_doc(&pipex, argv);
+	else if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc >= 5)
+		pipex.here_doc = false;
+	else
+		perror_exit_bonus(INV_ARGS, NULL);
 	init_pipex_bonus(&pipex, argc, argv, envp);	
 	i = 0;
 	while (i < pipex.cmd)

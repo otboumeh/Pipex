@@ -6,7 +6,7 @@
 #    By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/14 12:10:41 by otboumeh          #+#    #+#              #
-#    Updated: 2024/08/15 11:24:49 by otboumeh         ###   ########.fr        #
+#    Updated: 2024/08/28 18:40:48 by otboumeh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,16 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 PIPEX_LIB = ./includes/pipex.a
+PIPEX_BONUS_LIB = ./includes/pipex_bonus.a
 
 SRCS = $(wildcard sources/pipex*.c)
+SRCS_BONUS = $(wildcard sources_bonus/pipex*bonus.c)
 
 MAIN = main.c
+MAIN_BONUS = main_bonus.c
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -46,21 +50,30 @@ $(PIPEX_LIB): $(OBJS)
 	@ar rcs $(PIPEX_LIB) $(OBJS)
 	@echo "$(GREEN)pipex.a created successfully.$(RESET)"
 
+$(PIPEX_BONUS_LIB): $(OBJS_BONUS)
+	@echo "$(YELLOW)Compiling pipex_bonus.a library...$(RESET)"
+	ar rcs $(PIPEX_BONUS_LIB) $(OBJS_BONUS)
+	@echo "$(GREEN)pipex_bonus.a created successfully.$(RESET)"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+bonus : $(LIBFT) $(PIPEX_LIB) $(PIPEX_BONUS_LIB) $(MAIN_BONUS)
+	@echo "$(YELLOW)Compiling ./pipex bonus executable...$(RESET)"
+	$(CC) $(CFLAGS) -o $(NAME) $(MAIN_BONUS) $(PIPEX_LIB) $(PIPEX_BONUS_LIB) $(LIBFT)
+	@echo "$(GREEN)./pipex bonus executable created successfully.$(RESET)"
 
 all: bonus
 
 clean:
 	@echo "$(YELLOW)Deleting all the object files...$(RESET)"
-	@$(RM) $(OBJS) 
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 	@make -C $(LIBFT_DIR) clean
 	@echo "$(GREEN)All the object files deleted succesfully.$(RESET)"
 
 fclean: clean
 	@echo "$(YELLOW)Deleting the object files, *.a and executable file...$(RESET)"
-	@$(RM) $(PIPEX_LIB) $(NAME) 
+	@$(RM) $(PIPEX_LIB) $(PIPEX_BONUS_LIB) $(NAME) 
 	@make -C $(LIBFT_DIR) fclean
 	@echo "$(GREEN)Everything deleted succesfully.$(RESET)"
 

@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:51:27 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 11:58:06 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:42:13 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	error_msg_bonus(int err, char *param)
 
 void	perror_exit_bonus(int err, char *param)
 {
-	pxb_error_msg(err, param);
+	error_msg_bonus(err, param);
 	exit (err);
 }
 
