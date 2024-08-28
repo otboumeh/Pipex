@@ -6,12 +6,11 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:51:27 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 18:51:06 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:54:42 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-
 
 void	error_msg_bonus(int err, char *param)
 {

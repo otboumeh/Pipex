@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_here_doc.c                                   :+:      :+:    :+:   */
+/*   pipex_here_doc_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:29:22 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 16:43:18 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:55:00 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-
 
 static void	here_doc_read(t_pipex_bonus *pipex, char *limiter)
 {
@@ -35,7 +34,6 @@ static void	here_doc_read(t_pipex_bonus *pipex, char *limiter)
 		free(line);
 	}
 }
-
 
 void	here_doc(t_pipex_bonus *pipex, char **argv)
 {

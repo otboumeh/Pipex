@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:47:06 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 18:38:46 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:54:32 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	first_child_bonus(t_pipex_bonus *pipex, char **argv, char **envp)
 		cmd_fail_exit_bonus(pipex);
 }
 
-void	middle_child_bonus(t_pipex_bonus *pipex, char **argv, char **envp, int i)
+void	middle_child_bonus(t_pipex_bonus *pipex,
+			char **argv, char **envp, int i)
 {
 	if (dup2(pipex->pipe[(i - 1) * 2], STDIN_FILENO) == -1)
 		pipex_error_exit(NULL, DUP_ERR);

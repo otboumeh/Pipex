@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:16:04 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 18:38:37 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:44:14 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	first_child_bonus(t_pipex_bonus *pipex, char **argv, char **envp);
 void	last_child_bonus(t_pipex_bonus *pipex, char **argv, char **envp);
 void	child_selector_bonus(t_pipex_bonus *pipex, char **argv,
 			char **envp, int i);
-void	middle_child_bonus(t_pipex_bonus *pipex, char **argv, char **envp, int i);
-
+void	middle_child_bonus(t_pipex_bonus *pipex,
+			char **argv, char **envp, int i);
 
 //pipex_check_files.c
 void	pxb_check_infile(t_pipex_bonus *pipex, char **argv);
@@ -56,6 +56,5 @@ void	free_parent_closefd_bonus(t_pipex_bonus *pipex);
 
 //pipex_here_doc.c
 void	here_doc(t_pipex_bonus *pipex, char **argv);
-
 
 #endif

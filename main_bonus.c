@@ -6,7 +6,7 @@
 /*   By: otboumeh <otboumeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:26:41 by otboumeh          #+#    #+#             */
-/*   Updated: 2024/08/28 18:55:49 by otboumeh         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:56:10 by otboumeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	create_pipes_bonus(t_pipex_bonus *pipex)
 		i++;
 	}
 }
+
 static void	open_files_bonus(t_pipex_bonus *pipex, int argc, char **argv)
 {
 	if (pipex->here_doc)
@@ -37,13 +38,15 @@ static void	open_files_bonus(t_pipex_bonus *pipex, int argc, char **argv)
 	else
 		pipex->input_fd = open(argv[1], O_RDONLY);
 	if (pipex->here_doc)
-		pipex->output_fd = open (argv[5], O_APPEND | O_CREAT | O_WRONLY, 0000644);
+		pipex->output_fd = open (argv[5], O_APPEND
+				| O_CREAT | O_WRONLY, 0000644);
 	else
-		pipex->output_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | 01, 0000644);
+		pipex->output_fd = open(argv[argc - 1], O_TRUNC
+				| O_CREAT | 01, 0000644);
 }
 
 static void	init_pipex_bonus(t_pipex_bonus *pipex, int argc,
-				 char **argv, char **envp)
+				char **argv, char **envp)
 {
 	if (pipex->here_doc)
 		pipex->cmd = 2;
@@ -56,6 +59,7 @@ static void	init_pipex_bonus(t_pipex_bonus *pipex, int argc,
 		malloc_error_exit();
 	create_pipes_bonus(pipex);
 }
+
 static bool	child_from_parent(t_pipex_bonus pipex, int child_index)
 {
 	int	i;
@@ -69,18 +73,19 @@ static bool	child_from_parent(t_pipex_bonus pipex, int child_index)
 	}
 	return (true);
 }
-int main(int argc, char **argv, char **envp)
+
+int	main(int argc, char **argv, char **envp)
 {
-	t_pipex_bonus pipex;
-	int i;
-	
+	t_pipex_bonus	pipex;
+	int				i;
+
 	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc == 6)
 		here_doc(&pipex, argv);
 	else if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc >= 5)
 		pipex.here_doc = false;
 	else
 		perror_exit_bonus(INV_ARGS, NULL);
-	init_pipex_bonus(&pipex, argc, argv, envp);	
+	init_pipex_bonus(&pipex, argc, argv, envp);
 	i = 0;
 	while (i < pipex.cmd)
 	{
