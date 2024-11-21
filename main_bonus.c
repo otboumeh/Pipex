@@ -78,7 +78,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex_bonus	pipex;
 	int				i;
-
+	if (argc < 5)
+		return (0);
 	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc == 6)
 		here_doc(&pipex, argv);
 	else if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc >= 5)
