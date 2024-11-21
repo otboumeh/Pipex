@@ -67,7 +67,7 @@ The **Pipex** project, part of the 42 curriculum, is designed to recreate the be
 
 1. **Compile the Program:**
    ```bash
-   gcc -Wall -Wextra -Werror pipex.c
+   make
 2. Run Pipex for Multiple Commands:
    ```bash
    ./pipex infile "cmd1 args" "cmd2 args" outfile
